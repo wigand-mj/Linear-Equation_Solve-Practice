@@ -24,7 +24,7 @@ void set_fixed_vector(vector <vector<double>> &a, vector<double> &b){
     int vars = 2; int eqs = 2;
     for (int i=0; i<vars; i++){
         for (int j=0; j<eqs; j++){
-            a[i][j].push_back((rand() % 10) + 1);
+            a[i][j].push_back((rand() % 10) + 1); //random integer between 1 and 10
         }
     }
     for (int j=0; j<eqs; j++){
