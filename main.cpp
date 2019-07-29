@@ -16,19 +16,18 @@ string STATE = "INIT"; string nSTATE;
 
 vector<double> b;
 vector < vector<double>> a(1); //2-D A matrix v[i][j] where i is the column and j is the row
-
 //Function declarations
 
-void set_fixed_vector(vector <vector<double>> &a, vector<double> &b){
+void set_fixed_vector(vector <vector<double>> &v1, vector<double> &v2){
     //lets take vars and eqs 2
     int vars = 2; int eqs = 2;
     for (int i=0; i<vars; i++){
         for (int j=0; j<eqs; j++){
-            a[i][j].push_back((rand() % 10) + 1); //random integer between 1 and 10
+            (v1[i]).push_back((rand() % 10) + 1); //random integer between 1 and 10
         }
     }
     for (int j=0; j<eqs; j++){
-        b[j].push_back((rand() % 10) + 1);
+        v2.push_back((rand() % 10) + 1);
     }
 
 
