@@ -17,6 +17,7 @@ class les {
 
 
     // Row operation functions; overloaded to use 1-D and 2-D vectors
+    // each function takes a vector order (specifying which rows should be operated on)
     void rows_swap(std::vector<double> &v, std::vector<double> order);
     void rows_swap(std::vector< std::vector<double> > &v, std::vector<double> order);
 
