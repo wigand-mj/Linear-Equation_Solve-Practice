@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <cstdlib>
+#include <cstdlib> // can probably be removed later; currently only used for set_fixed_vectors()
 #include "lineq.h"
 #include "user_interface.h"
 
@@ -9,7 +9,7 @@ using namespace std;
 using std::string;
 
 //creating linear equation machien object
-les machine(1,1);
+//les machine(1,1);
 
 //declaring (and initializing states for state machine)
 string STATE = "INIT"; string nSTATE;
@@ -31,12 +31,15 @@ void set_fixed_vector(vector <vector<double>> &v1, vector<double> &v2){
     }
 }
 
+
 string user_input();
 void draw_matrix(vector<int> row,vector<int> column , int size);
 
 
 int main(){
+
 set_fixed_vector(a,b);
+
 vector<int> row;
 vector<int> column;
 row[0]=1;

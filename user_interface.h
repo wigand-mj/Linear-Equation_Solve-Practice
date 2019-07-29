@@ -12,7 +12,7 @@ using std::string;
 
 //function declarations
 string user_input(void);
-void draw_matrix(vector<int> row,vector<int> column , int size);
+void draw_matrix(vector<vector<double> > matrix, int size);
 
 
 #endif //CPP_PROJECT_USER_INTERFACE_H
