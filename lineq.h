@@ -5,8 +5,17 @@
 
 class les {
 
+    int eqs, vars;
     public:
-    
+
+    les(int e, int va);
+    ~les();
+
+    // swap function from book
+    template<typename T>
+        void swap(T &a, T &b);
+
+
     // Row operation functions; overloaded to use 1-D and 2-D vectors
     void rows_swap(std::vector<double> &v, std::vector<double> order);
     void rows_swap(std::vector< std::vector<double> > &v, std::vector<double> order);
@@ -25,8 +34,7 @@ class les {
     
     
     
-    les(int eqs, int vars);
-    ~les();
+  
 
 };
 
