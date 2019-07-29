@@ -1,11 +1,13 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <user_interface.h>
+#include "lineq.h"
+#include "user_interface.h"
 
 using namespace std;
 using std::string;
 
+les machine(1,1);
 //Function declarations
 string user_input();
 void draw_matrix(vector<int> row,vector<int> column , int size);
