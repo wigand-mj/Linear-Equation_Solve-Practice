@@ -2,8 +2,8 @@
 // Created by Ronald on 29-7-2019.
 //
 
-#ifndef CPP_PROJECT_USER_INTERFACE_H
-#define CPP_PROJECT_USER_INTERFACE_H
+#ifndef user_interface_H
+#define user_interface_H
 #include <iostream>
 #include <string>
 #include <vector>
