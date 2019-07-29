@@ -10,9 +10,20 @@
 using namespace std;
 using std::string;
 
-//function declarations
-string user_input(void);
-void draw_matrix(vector<vector<double> > matrix, int size);
+class UI
+{
 
+
+public:
+UI();
+~UI();
+
+//function declarations
+//void user_input();
+void draw_matrix(vector<vector<double> > A, vector<double> B , int size);
+
+
+
+};
 
 #endif //CPP_PROJECT_USER_INTERFACE_H
