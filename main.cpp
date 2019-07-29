@@ -9,7 +9,7 @@ using namespace std;
 using std::string;
 
 //creating linear equation machien object
-les machine(1,1);
+//les machine(1,1);
 
 //declaring (and initializing states for state machine)
 string STATE = "INIT"; string nSTATE;
@@ -29,6 +29,7 @@ void set_fixed_vector(vector <vector<double>> &v1, vector<double> &v2){
     for (int j=0; j<eqs; j++){
         v2.push_back((rand() % 10) + 1);
     }
+    draw_matrix(v1,3);
 
 
 }
