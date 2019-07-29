@@ -16,7 +16,10 @@ vector<int> row;
 vector<int> column;
 row[0]=1;
 row[1]=2;
-    //user_input();
-    draw_matrix([2,2],[1,2],2);
+column[0]=1;
+column[1]=2;
+    user_input();
+//"hello"
+    //draw_matrix(row,column,2);
 }
 
