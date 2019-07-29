@@ -29,8 +29,6 @@ void set_fixed_vector(vector <vector<double>> &v1, vector<double> &v2){
     for (int j=0; j<eqs; j++){
         v2.push_back((rand() % 10) + 1);
     }
-
-
 }
 
 string user_input();
