@@ -23,5 +23,5 @@ column[1]=2;
     user_input();
 //"hello"
     //draw_matrix(row,column,2);
-}
+return 0; }
 
