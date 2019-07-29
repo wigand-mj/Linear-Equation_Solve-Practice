@@ -2,7 +2,7 @@
 
 
 ## TODO
-- Operations (M)
+- Operations (M) - Done!
 - I/O & Users (R)
 - State Machine (M)
 - Exercises (maybe read from file) (R)
