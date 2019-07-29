@@ -7,7 +7,11 @@
 using namespace std;
 using std::string;
 
+//creating linear equation machien object
 les machine(1,1);
+
+//declaring (and initializing states for state machine)
+string STATE = "INIT"; string nSTATE;
 //Function declarations
 string user_input();
 void draw_matrix(vector<int> row,vector<int> column , int size);
@@ -23,5 +27,32 @@ column[1]=2;
     user_input();
 //"hello"
     //draw_matrix(row,column,2);
+
+/* 
+// STATE Machine
+while (true)
+{
+    if (STATE == "INIT"){
+        //do this
+        //STATE = next state
+    }
+    else if (STATE == ...){
+        //do this
+    }
+    ...
+    
+    else if (STATE == "TRANS"){
+        STATE = nSTATE;
+    }
+    else if (STATE == "EXIT"){
+        system("pause");
+        break;
+    }
+
+}
+
+*/
+
+
 return 0; }
 
