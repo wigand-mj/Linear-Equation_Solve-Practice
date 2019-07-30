@@ -21,7 +21,7 @@ UI();
 //function declarations
 //void user_input();
 void draw_matrix(vector<vector<double> > A, vector<double> B , int size);
-
+void get_Dimensions(int &v, int &e);
 
 
 };

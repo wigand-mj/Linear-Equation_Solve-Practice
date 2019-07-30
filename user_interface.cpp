@@ -27,6 +27,15 @@ void UI::user_input() {
 }
 */
 
+
+void UI::get_Dimensions(int &v, int &e){
+    std::cout << "How many variables?" << std::endl;
+    std::cin >> v;
+    std::cout << "How many equations?" << std::endl;
+    std::cin >> e;
+}
+
+
 void UI::draw_matrix(vector<vector<double> > A, vector<double> B , int size){
 
     for (int j = 0; j <size ; ++j) {
