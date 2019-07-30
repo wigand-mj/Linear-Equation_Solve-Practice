@@ -8,15 +8,21 @@
 using namespace std;
 using std::string;
 
-//creating linear equation machine and ui object
-les machine(2,2);
+int vars = 1; int eqs = 1;
+
+//creating ui object
 UI ui;
+//creating linear equation machine object
+les machine(eqs,vars);
+
 //declaring (and initializing states for state machine)
 string STATE = "INIT"; string nSTATE;
 
 vector<double> b;
 vector < vector<double>> a(2); //2-D A matrix v[i][j] where i is the column and j is the row
-//Function declarations
+
+
+
 
 
 
@@ -35,32 +41,40 @@ void set_fixed_vector(vector <vector<double>> &v1, vector<double> &v2){
         v2.push_back(double((rand() % 10) + 1));
     }
 }
-//###################
+//###################s
 
-//string user_input();
-//ui.draw_matrix(vector<int> row,vector<int> column , int size);
+
 
 
 
 int main(){
 
-set_fixed_vector(a,b);
-ui.draw_matrix(a, b, 2);
-
-
-/* 
 // STATE Machine
 while (true)
 {
     if (STATE == "INIT"){
-        //do this
-        //STATE = next state
-    }
-    else if (STATE == ...){
-        //do this
-    }
-    ...
     
+    // getting dimensions
+    vars=2; eqs=2;
+    machine.update_dimensions(eqs, vars);
+    //setting fixed vectors a and b for testing
+    set_fixed_vector(a,b);
+    
+    // Setting next State
+    STATE = "DRAW";
+    }
+    else if (STATE == "DRAW"){
+        ui.draw_matrix(a, b, 2);
+        STATE = "SWAPNDRAw";
+    }
+    else if (STATE == "SWAPNDRAw"){
+        vector<double> order;
+        order.push_back(1); order.push_back(2);
+        machine.rows_swap(a, order);
+        machine.rows_swap(b, order);
+        ui.draw_matrix(a, b, 2);
+        STATE = "EXIT";
+    }
     else if (STATE == "TRANS"){
         STATE = nSTATE;
     }
@@ -71,7 +85,6 @@ while (true)
 
 }
 
-*/
 
 
 return 0; }
