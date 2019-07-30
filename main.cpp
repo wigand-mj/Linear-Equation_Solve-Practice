@@ -8,6 +8,8 @@
 using namespace std;
 using std::string;
 
+
+
 int vars = 1; int eqs = 1;
 
 //creating ui object
@@ -43,6 +45,96 @@ void set_fixed_vector(vector <vector<double>> &v1, vector<double> &v2){
 }
 //###################s
 
+// parses string and adds to container (usually vector) inspired from: https://stackoverflow.com/questions/14265581/parse-split-a-string-in-c-using-string-delimiter-standard-c
+template<typename Container>
+    void string_parse(std::string sep, std::string string, Container &container){
+        size_t counter = 0;
+        std::string characters;
+        try{
+        while ((counter = string.find(sep)) != std::string::npos){
+            characters = string.substr(0, counter);
+            container.push_back(stod(characters));
+            string.erase(0, counter + sep.length());
+            
+        }   container.push_back(stod(string));
+        }   catch (const std::exception &e) {std::cout << "Error. " << std::endl; std::cout << "Something was wrong with your input. Try again" << std::endl; STATE = "TRANS";}
+    }
+
+// asking for input and working with gien user input
+void operation(){
+    std::cout << "Which operation do you want to perform?" << std::endl;
+    std::cout << "(s)wap - (m)ultiplicate - (d)ivide - (a)dd - (su)btract   | [(e)xit]" << std::endl;
+    std::string input;
+    std::string op;
+    try { std::cin >> input; }
+    catch (const std::exception &e) {std::cout << "Error. " << std::endl; std::cout << "Something was wrong with your input. Try again" << std::endl; nSTATE = "OPERATIONS"; STATE = "TRANS";}
+    
+
+    if (input == "a"){
+        
+        std::cout << "adding ROW_A to ROW_B [Input: ROWB,ROWA]" << std::endl;
+        std::cin >> op;
+        std::vector<double> order;
+        string_parse(",", op, order);
+
+        machine.rows_add(a, order); machine.rows_add(b, order);
+        
+        nSTATE = "DRAW";
+        STATE = "TRANS";
+    } else if (input == "m"){
+        std::cout << "multiplicating ROW with factor [Input: ROW,FACTOR]" << std::endl;
+        std::cin >> op;
+        std::vector<double> order;
+        string_parse(",", op, order);
+
+        machine.rows_multiplicate(a, order); machine.rows_multiplicate(b, order);
+       
+        nSTATE = "DRAW";
+        STATE = "TRANS";
+    } else if (input == "s"){
+
+        std::cout << "swapping ROW_A and ROW_B [Input: ROWA,ROWB]" << std::endl;
+        std::cin >> op;
+        std::vector<double> order;
+        string_parse(",", op, order);
+
+        machine.rows_swap(a, order); machine.rows_swap(b, order);
+
+        nSTATE = "DRAW";
+        STATE = "TRANS";
+    } else if (input == "su"){
+        std::cout << "subtracting ROW_A from ROW_B [Input: ROWB,ROWA]" << std::endl;
+        std::cin >> op;
+        std::vector<double> order;
+        string_parse(",", op, order);
+
+        machine.rows_subtract(a, order); machine.rows_subtract(b, order);
+        
+        nSTATE = "DRAW";
+        STATE = "TRANS";
+    } else if (input == "d"){
+        std::cout << "dividing ROW by divisor [Input: ROW,DIVISOR]" << std::endl;
+        std::cin >> op;
+        std::vector<double> order;
+        string_parse(",", op, order);
+
+        machine.rows_divide(a, order); machine.rows_divide(b, order);
+       
+        nSTATE = "DRAW";
+        STATE = "TRANS";
+    } else if (input == "e"){
+        nSTATE = "EXIT";
+        STATE = "TRANS";
+    }
+    
+    
+    else {
+        std::cout << "Something was wrong with your input. Try again" << std::endl;
+        nSTATE = "OPERATIONS";
+        STATE = "TRANS";
+    }
+}
+
 
 
 
@@ -65,15 +157,11 @@ while (true)
     }
     else if (STATE == "DRAW"){
         ui.draw_matrix(a, b, 2);
-        STATE = "SWAPNDRAw";
+        STATE = "OPERATION";
     }
-    else if (STATE == "SWAPNDRAw"){
-        vector<double> order;
-        order.push_back(1); order.push_back(2);
-        machine.rows_swap(a, order);
-        machine.rows_swap(b, order);
-        ui.draw_matrix(a, b, 2);
-        STATE = "EXIT";
+    else if (STATE == "OPERATION"){
+        STATE = "DRAW"; // has to be before operation() call because of exit condition
+        operation();      
     }
     else if (STATE == "TRANS"){
         STATE = nSTATE;
