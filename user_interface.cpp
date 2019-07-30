@@ -38,6 +38,40 @@ void UI::get_Dimensions(int &v, int &e){
 }
 
 
+// printing as a[alpha][beta], b[beta]; beta proportional to vars, alpha porportional to eqs
+void UI::draw_matrix(std::vector< std::vector<double> > a, std::vector<double> b, int eqs, int vars){
+    std::vector< std::vector<double> >::iterator it_a = a.begin();
+    std::vector<double>::iterator it_b = b.begin();
+
+    std::cout << std::endl;
+    std::cout << "------" << std::endl;
+
+    for (int i = 0; i<vars; i++){
+        //printing A:
+        std::cout << "(" << i+1 << ")" << '\t';
+        std::cout << "[ ";
+        for (int k = 0; k<eqs; k++){
+            std::cout << a[k][i] << " ";
+        }
+        std::cout << "]";
+
+        std::cout << " ";
+        std::cout << "|" << " ";
+
+        //printing b:
+        std::cout << "[ ";
+        std::cout << b[i];
+        std::cout << " ]";
+        
+
+        std::cout << std::endl;
+    }   std::cout << "------" << std::endl; std::cout << std::endl;
+
+    }
+
+
+
+/*
 void UI::draw_matrix(vector<vector<double> > A, vector<double> B , int size){
 
     for (int j = 0; j <size ; ++j) {
@@ -68,7 +102,7 @@ void UI::draw_matrix(vector<vector<double> > A, vector<double> B , int size){
         }
     }
 }
-
+*/
 
 
 UI::UI(){}

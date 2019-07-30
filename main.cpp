@@ -74,7 +74,7 @@ void operation(){
         
         std::cout << "adding ROW_A to ROW_B [Input: ROWB,ROWA]" << std::endl;
         std::cin >> op;
-        std::vector<double> order;
+        std::vector<double> order; // TODO change so that is does not have to be re-created all the time
         string_parse(",", op, order);
 
         machine.rows_add(a, order); machine.rows_add(b, order);
@@ -156,7 +156,7 @@ while (true)
     STATE = "DRAW";
     }
     else if (STATE == "DRAW"){
-        ui.draw_matrix(a, b, 2);
+        ui.draw_matrix(a, b, eqs, vars);
         STATE = "OPERATION";
     }
     else if (STATE == "OPERATION"){
