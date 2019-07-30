@@ -5,7 +5,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <string>
 #include "user_interface.h"
+#include "lineq.h"
 using std::string;
 using namespace std;
 
@@ -66,6 +68,7 @@ void UI::draw_matrix(vector<vector<double> > A, vector<double> B , int size){
         }
     }
 }
+
 
 
 UI::UI(){}
