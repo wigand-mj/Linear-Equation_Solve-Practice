@@ -1,6 +1,11 @@
 #include "lineq.h"
 #include <vector>
 
+
+void les::update_dimensions(int e, int v){
+    eqs = e; vars = v;
+}
+
 //swap function from script
 template<typename T>
     void les::swap(T &a, T &b){

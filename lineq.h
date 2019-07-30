@@ -11,6 +11,9 @@ class les {
     les(int e, int va);
     ~les();
 
+   
+   void update_dimensions(int e, int v);
+   
     // swap function from script
     template<typename T>
         void swap(T &a, T &b);
