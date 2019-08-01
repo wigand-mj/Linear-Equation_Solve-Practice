@@ -1,7 +1,3 @@
-//
-// Created by Ronald on 29-7-2019.
-//
-
 #include <iostream>
 #include <string>
 #include <vector>
@@ -10,25 +6,6 @@
 #include "lineq.h"
 using std::string;
 using namespace std;
-
-/* 
-void UI::user_input() {
-    //this function handles the user input for matrix manipulations and returns the matrix after the operation
-    /*
-     * x for multiplication
-     * s for swapping
-     * sub for subtraction
-     * add for addition
-     * div for division
-     *
-    cin >> inp;
-    cout<<inp<<"\n";
-    cout<<"Thank you";
-
-
-}
-*/
-
 
 void UI::get_Dimensions(int &v, int &e){
     std::cout << "How many variables?" << std::endl;
