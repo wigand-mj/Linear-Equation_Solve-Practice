@@ -56,6 +56,7 @@ template<typename Container>
     void string_parse(std::string sep, std::string string, Container &container){
         size_t counter = 0;
         std::string characters;
+        short er=0;
         try{
         while ((counter = string.find(sep)) != std::string::npos){
             characters = string.substr(0, counter);
@@ -63,7 +64,7 @@ template<typename Container>
             string.erase(0, counter + sep.length());
             
         }   container.push_back(stod(string));
-        }   catch (const std::exception &e) {std::cout << "Error. " << std::endl; std::cout << "Something was wrong with your input. Try again" << std::endl; STATE = "TRANS";}
+        }   catch (const std::exception &e) {std::cout << "Error. " << std::endl; std::cout << "Something was wrong with your input. Try again" << std::endl; nSTATE = "ERROR"; STATE = "TRANS";}
     }
 
 
@@ -129,105 +130,105 @@ void operation(){
     std::string input;
     std::string op;
     try { std::cin >> input; }
-    catch (const std::exception &e) {std::cout << "Error. " << std::endl; std::cout << "Something was wrong with your input. Try again" << std::endl; nSTATE = "DRAW"; STATE = "TRANS";}
+    catch (const std::exception &e) {std::cout << "Error. " << std::endl; std::cout << "Something was wrong with your input. Try again" << std::endl; nSTATE = "ERROR"; STATE = "TRANS";}
     
-    if (input == "s"){
 
-        std::cout << "swapping ROW_A and ROW_B [Input: ROWA,ROWB]" << std::endl;
-        std::cin >> op;
-        std::vector<double> order;
-        string_parse(",", op, order);
+        if (input == "s"){
 
-        machine.rows_swap(a, order); machine.rows_swap(b, order);
-
-        nSTATE = "DRAW";
-        STATE = "TRANS";
-    } else if (input == "a"){
-        if (difficulty>=1){
-            std::cout << "adding ROW_A to ROW_B [Input: ROWB,ROWA]" << std::endl;
+            std::cout << "swapping ROW_A and ROW_B [Input: ROWA,ROWB]" << std::endl;
             std::cin >> op;
-            std::vector<double> order; // TODO change so that is does not have to be re-created all the time
+            std::vector<double> order;
             string_parse(",", op, order);
 
-            machine.rows_add(a, order); machine.rows_add(b, order);
+            if (nSTATE != "ERROR"){
+                machine.rows_swap(a, order); machine.rows_swap(b, order);
+            }
+
+            nSTATE = "DRAW";
+            STATE = "TRANS";
+        } else if (input == "a"){
+            if (difficulty>=1){
+                std::cout << "adding ROW_A to ROW_B [Input: ROWB,ROWA]" << std::endl;
+                std::cin >> op;
+                std::vector<double> order; // TODO change so that is does not have to be re-created all the time
+                string_parse(",", op, order);
+
+                if (nSTATE != "ERROR"){
+                    machine.rows_add(a, order); machine.rows_add(b, order);
+                }
+                
+                nSTATE = "DRAW";
+                STATE = "TRANS";
+            } 
+        } else if (input == "su"){
+            if (difficulty>=1){
+                std::cout << "subtracting ROW_A from ROW_B [Input: ROWB,ROWA]" << std::endl;
+                std::cin >> op;
+                std::vector<double> order;
+                string_parse(",", op, order);
+
+                if (nSTATE != "ERROR"){
+                    machine.rows_subtract(a, order); machine.rows_subtract(b, order);
+                }
+                
+                nSTATE = "DRAW";
+                STATE = "TRANS";
+            }
+        } else if (input == "m"){
+            if (difficulty==2){
+                std::cout << "multiplicating ROW with factor [Input: ROW,FACTOR]" << std::endl;
+                std::cin >> op;
+                std::vector<double> order;
+                string_parse(",", op, order);
+
+                if (nSTATE != "ERROR"){
+                    machine.rows_multiplicate(a, order); machine.rows_multiplicate(b, order);
+                }
             
-            nSTATE = "DRAW";
-            STATE = "TRANS";
-        } else {
-            std::cout << "Something was wrong with your input. Try again" << std::endl;
-            nSTATE = "DRAW";
-            STATE = "TRANS";
-          }
-    } else if (input == "su"){
-        if (difficulty>=1){
-            std::cout << "subtracting ROW_A from ROW_B [Input: ROWB,ROWA]" << std::endl;
-            std::cin >> op;
-            std::vector<double> order;
-            string_parse(",", op, order);
+                nSTATE = "DRAW";
+                STATE = "TRANS";
+            } else {
+                std::cout << "Something was wrong with your input. Try again" << std::endl;
+                nSTATE = "DRAW";
+                STATE = "TRANS";
+            }
+        } else if (input == "d"){
+            if (difficulty==2){
+                std::cout << "dividing ROW by divisor [Input: ROW,DIVISOR]" << std::endl;
+                std::cin >> op;
+                std::vector<double> order;
+                string_parse(",", op, order);
 
-            machine.rows_subtract(a, order); machine.rows_subtract(b, order);
+                if (nSTATE != "ERROR"){
+                    machine.rows_divide(a, order); machine.rows_divide(b, order);
+                }
             
-            nSTATE = "DRAW";
+                nSTATE = "DRAW";
+                STATE = "TRANS";
+            }
+        } else if (input == "e"){
+            nSTATE = "EXIT";
             STATE = "TRANS";
-        } else {
-            std::cout << "Something was wrong with your input. Try again" << std::endl;
-            nSTATE = "DRAW";
+        } else if (input == "n"){
+            nSTATE = "LOAD";
             STATE = "TRANS";
-          }
-    } else if (input == "m"){
-        if (difficulty==2){
-            std::cout << "multiplicating ROW with factor [Input: ROW,FACTOR]" << std::endl;
-            std::cin >> op;
-            std::vector<double> order;
-            string_parse(",", op, order);
-
-            machine.rows_multiplicate(a, order); machine.rows_multiplicate(b, order);
-        
-            nSTATE = "DRAW";
-            STATE = "TRANS";
-        } else {
-            std::cout << "Something was wrong with your input. Try again" << std::endl;
-            nSTATE = "DRAW";
-            STATE = "TRANS";
-          }
-    } else if (input == "d"){
-        if (difficulty==2){
-            std::cout << "dividing ROW by divisor [Input: ROW,DIVISOR]" << std::endl;
-            std::cin >> op;
-            std::vector<double> order;
-            string_parse(",", op, order);
-
-            machine.rows_divide(a, order); machine.rows_divide(b, order);
-        
-            nSTATE = "DRAW";
-            STATE = "TRANS";
-        } else {
-            std::cout << "Something was wrong with your input. Try again" << std::endl;
-            nSTATE = "DRAW";
-            STATE = "TRANS";
-          }
-    } else if (input == "e"){
-        nSTATE = "EXIT";
-        STATE = "TRANS";
-    } else if (input == "n"){
-        nSTATE = "LOAD";
-        STATE = "TRANS";
-    } else if (input == "p"){ //   NEEDS TO BE REMOVED LATER
-        if (difficulty<2){
-          difficulty++;
+        } else if (input == "p"){ //   NEEDS TO BE REMOVED LATER
+            if (difficulty<2){
+            difficulty++;
+            }
+        } else if (input == "o"){ //   NEEDS TO BE REMOVED LATER
+            if (difficulty>0){
+            difficulty--;
+            }
         }
-    } else if (input == "o"){ //   NEEDS TO BE REMOVED LATER
-        if (difficulty>0){
-          difficulty--;
+        
+        
+        else {
+            std::cout << "Something was wrong with your input. Try again" << std::endl;
+            nSTATE = "DRAW";
+            STATE = "TRANS";
         }
-    }
-    
-    
-    else {
-        std::cout << "Something was wrong with your input. Try again" << std::endl;
-        nSTATE = "DRAW";
-        STATE = "TRANS";
-    }
+
 }
 
 vector<double> scramble_order(int vars){
@@ -384,6 +385,7 @@ while (true)
     }
     else if (STATE == "TRANS"){
         STATE = nSTATE;
+        nSTATE = "NOTHING";
     }
     else if (STATE == "EXIT"){
         system("pause");
