@@ -134,7 +134,12 @@ void operation(){
                 string_parse(",", op, order);
 
                 if (nSTATE != "ERROR"){
-                    machine.rows_add(a, order); machine.rows_add(b, order);
+                    if (order[0] != order[1]){
+                        machine.rows_add(a, order); machine.rows_add(b, order);
+                    } else {
+                        std::cout << "Adding a row to itself if not allowed. Try Again!" << std::endl;
+                    }
+                    
                 }
                 
                 nSTATE = "DRAW";
@@ -148,7 +153,11 @@ void operation(){
                 string_parse(",", op, order);
 
                 if (nSTATE != "ERROR"){
-                    machine.rows_subtract(a, order); machine.rows_subtract(b, order);
+                    if (order[0] != order[1]){
+                        machine.rows_subtract(a, order); machine.rows_subtract(b, order);
+                    } else {
+                        std::cout << "Subtracting a row from itself if not allowed. Try Again!" << std::endl;
+                    }
                 }
                 
                 nSTATE = "DRAW";
