@@ -65,6 +65,54 @@ template<typename Container>
     }
 
 
+bool isSolved (std::vector< std::vector<double>> &v1){
+    bool ans = true;
+    short counter = 0;
+    int no_free_variables = vars-eqs;
+    int free_counter = 0;
+
+    // columns
+    for (int i=0; i<vars; i++){
+        for (int j=0; j<eqs; j++){
+
+            if (v1[i][j] == 1){
+                counter++;
+            } else if (v1[i][j] != 1 && v1[i][j] != 0) {
+                ans = false;
+                break;
+            }
+        }
+        if (counter > 1){
+            ans = false;
+            break;
+        } counter = 0;
+    }
+
+    
+    // rows
+    for (int j=0; j<eqs; j++){
+        for (int i=0; i<vars; i++){
+
+            if (v1[i][j] == 1){
+                counter++;
+            } else if (v1[i][j] != 1 && v1[i][j] != 0) {
+                ans = false;
+                break;
+            }
+        }
+        if (counter > 1){
+            free_counter++;
+            break;
+        } counter = 0;
+        if (free_counter > no_free_variables){
+            ans = false;
+            break;
+        }
+    }
+
+    return ans;
+}
+
 // asking for input and working with gien user input
 void operation(){
     std::cout << "Which operation do you want to perform?" << std::endl;
