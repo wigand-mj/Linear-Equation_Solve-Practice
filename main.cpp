@@ -83,6 +83,13 @@ bool isSolved (std::vector< std::vector<double>> &v1){
                 ans = false;
                 break;
             }
+
+             if (j==i){
+                if ((a[i][j])!=1){
+                    ans=false;
+                    break;
+                }
+            }
         }
         if (counter > 1){
             ans = false;
@@ -268,7 +275,7 @@ void gen_exercise(vector<vector<double> > &a,vector<double> &b, int eqs, int var
         }
         b.push_back(rand()%9+1);
     }
-    for (int l = 0; l < difficulty ; ++l) {
+    for (int l = 0; l <= difficulty ; ++l) {
         if(l==0)
         {
             for (int i = 0; i <rand()%5+6; ++i) {
@@ -342,6 +349,14 @@ while (true)
     } 
     else if (STATE == "LOAD"){
         // load random exercise depending on difficulty and thus on level
+        /*
+        if (level > 3){
+            difficulty = 1;
+            if (level > 6){
+                difficulty = 2;
+            }
+        }
+        */
         gen_exercise(a, b, eqs,  vars, difficulty);
         STATE = "DRAW";
     }
@@ -357,6 +372,12 @@ while (true)
     else if (STATE == "CHECK"){
         // check if correct and if yes level++ and draw. If level at speciic threshhold, also difficulty++
         STATE = "OPERATION";
+        if (isSolved(a)){
+            std::cout << "Good Job!" << std::endl;
+            STATE = "LOAD";
+            level++;
+        }
+        
     }
     else if (STATE == "OPERATION"){
         STATE = "DRAW"; // has to be before operation() call because of exit condition
