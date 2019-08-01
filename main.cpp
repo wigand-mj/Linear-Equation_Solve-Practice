@@ -25,7 +25,7 @@ les machine(eqs,vars);
 string STATE = "INIT"; string nSTATE;
 
 vector<double> b;
-vector < vector<double>> a(2); //2-D A matrix v[i][j] where i is the column and j is the row
+vector < vector<double>> a(4); //2-D A matrix v[i][j] where i is the column and j is the row
 
 
 
