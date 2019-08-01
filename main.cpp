@@ -129,7 +129,7 @@ void operation(){
     std::string input;
     std::string op;
     try { std::cin >> input; }
-    catch (const std::exception &e) {std::cout << "Error. " << std::endl; std::cout << "Something was wrong with your input. Try again" << std::endl; nSTATE = "OPERATIONS"; STATE = "TRANS";}
+    catch (const std::exception &e) {std::cout << "Error. " << std::endl; std::cout << "Something was wrong with your input. Try again" << std::endl; nSTATE = "DRAW"; STATE = "TRANS";}
     
     if (input == "s"){
 
