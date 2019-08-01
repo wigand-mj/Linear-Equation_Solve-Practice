@@ -222,12 +222,93 @@ void operation(){
     }
 }
 
+vector<double> scramble_order(int vars){
+    double act1,act2;
+    vector<double> order;
+    act1 = rand() % (vars) + 1;
+    act2 = rand() % (vars) + 1;
+    if (act1 == act2) {
+        if (act1 > 0) {
+            act1--;
+        } else {
+            act1++;
+        }
+    }
+    order = {act1, act2};
+    return order;
 
+
+}
+
+void gen_exercise(vector<vector<double> > &a,vector<double> &b,int eqs, int vars,short difficulty)
+{
+
+    a.clear();
+    b.clear();
+    vector<double> order;
+    double act;
+    double row;
+    machine.update_dimensions(eqs,vars);
+    //initiliaze row echelon form to be scrambled
+    for (int i=0;i<=vars;i++) {
+        for (int j = 0; j <= eqs; j++) {
+            if (i == j) {
+                a[i].push_back(double(1));
+
+            } else {
+                if (j > vars - 1) {
+                    a[i].push_back(rand() % 9 + 1);
+                } else {
+                    a[i].push_back(double(0));
+                }
+
+            }
+        }
+        b.push_back(rand()%9+1);
+    }
+    for (int l = 1; l <=difficulty ; ++l) {
+
+        if(difficulty==1)
+        {
+            for (int i = 0; i <rand()%5+6; ++i) {
+                order = scramble_order(vars);
+                machine.rows_swap(a,order);
+                machine.rows_swap(b,order);
+            }
+        }
+        else if (difficulty == 2)
+        {
+            for (int i = 0; i <rand()%3+4; ++i) {
+                order = scramble_order(vars);
+
+
+                machine.rows_add(a, order);
+                machine.rows_add(b, order);
+            }
+            for (int i = 0; i <rand()%3+4; ++i) {
+                order = scramble_order(vars);
+                machine.rows_subtract(a, order);
+                machine.rows_subtract(b, order);
+            }
+
+        }
+        else
+        {
+            for (int i = 0; i <rand()%3+4; ++i) {
+                act=rand()%4+2;
+                row=rand()%vars+1;
+            machine.rows_multiplicate(a,{row,act});
+            machine.rows_multiplicate(b,{row,act});
+            }
+        }
+    }
+}
 
 
 
 int main(){
-
+srand(time(NULL));
+std::cout << std::fixed<<"" ;
 // STATE Machine
 while (true)
 {
@@ -240,8 +321,8 @@ while (true)
     vars=2; eqs=2;
     machine.update_dimensions(eqs, vars);
     //setting fixed vectors a and b for testing
-    set_fixed_vector(a,b);
-    
+    //set_fixed_vector(a,b);
+    gen_exercise(a,b,eqs,vars,1);
     // Setting next State
     STATE = "WELCOME";
     } 
