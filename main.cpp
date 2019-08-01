@@ -65,19 +65,6 @@ template<typename Container>
     }
 
 
-/*
-if (difficulty>0){
-    if (difficulty<2){
-        // =1
-    }
-    else { // =2 }
-}
-else  {  // = }
-*/
-
-
-
-
 // asking for input and working with gien user input
 void operation(){
     std::cout << "Which operation do you want to perform?" << std::endl;

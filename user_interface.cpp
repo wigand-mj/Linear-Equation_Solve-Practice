@@ -71,39 +71,6 @@ void UI::draw_matrix(std::vector< std::vector<double> > a, std::vector<double> b
 
 
 
-/*
-void UI::draw_matrix(vector<vector<double> > A, vector<double> B , int size){
-
-    for (int j = 0; j <size ; ++j) {
-        cout<<" ___ ";
-        if(j==size-1)
-        {
-            cout<<"\n";
-        }
-    }
-
-    for (int k = 0; k <size ; ++k) {
-
-
-        for (int i = 0; i < size; ++i) {
-            cout << "| " << A[i][k] << " ";
-            if (i == size - 1) {
-                cout << "|";
-            }
-        }
-        cout<<"\n";
-    }
-
-    for (int j = 0; j <size ; ++j) {
-        cout<<" ___ ";
-        if(j==size-1)
-        {
-            cout<<"\n";
-        }
-    }
-}
-*/
-
 
 UI::UI(){}
 UI::~UI(){}
