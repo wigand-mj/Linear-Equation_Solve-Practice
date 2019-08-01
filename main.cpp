@@ -4,6 +4,7 @@
 #include <cstdlib> // can probably be removed later; currently only used for set_fixed_vectors()
 #include "lineq.h"
 #include "user_interface.h"
+#include "time.h"
 
 using namespace std;
 using std::string;
@@ -15,7 +16,7 @@ short level;
 
 // system dimensions
 
-int vars = 1; int eqs = 1;
+int vars = 2; int eqs = 2;
 
 //creating ui object
 UI ui;
@@ -240,24 +241,25 @@ vector<double> scramble_order(int vars){
 
 }
 
-void gen_exercise(vector<vector<double> > &a,vector<double> &b,int eqs, int vars,short difficulty)
+void gen_exercise(vector<vector<double> > &a,vector<double> &b, int eqs, int vars, short difficulty)
 {
-
-    a.clear();
+    for (int i=0; i<vars; i++){
+        a[i].clear();
+    }
     b.clear();
     vector<double> order;
     double act;
     double row;
     machine.update_dimensions(eqs,vars);
     //initiliaze row echelon form to be scrambled
-    for (int i=0;i<=vars;i++) {
-        for (int j = 0; j <= eqs; j++) {
+    for (int i=0;i<vars;i++) {
+        for (int j = 0; j < eqs; j++) {
             if (i == j) {
-                a[i].push_back(double(1));
+                a[i].push_back(1);
 
             } else {
                 if (j > vars - 1) {
-                    a[i].push_back(rand() % 9 + 1);
+                    a[i].push_back((rand() % 9 + 1));
                 } else {
                     a[i].push_back(double(0));
                 }
@@ -266,6 +268,7 @@ void gen_exercise(vector<vector<double> > &a,vector<double> &b,int eqs, int vars
         }
         b.push_back(rand()%9+1);
     }
+
     for (int l = 1; l <=difficulty ; ++l) {
 
         if(difficulty==1)
@@ -301,14 +304,14 @@ void gen_exercise(vector<vector<double> > &a,vector<double> &b,int eqs, int vars
             machine.rows_multiplicate(b,{row,act});
             }
         }
-    }
+    } 
 }
 
 
 
 int main(){
 srand(time(NULL));
-std::cout << std::fixed<<"" ;
+
 // STATE Machine
 while (true)
 {
@@ -318,11 +321,12 @@ while (true)
     level = 1;
 
     // getting dimensions
-    vars=2; eqs=2;
+    vars=4; eqs=4;
     machine.update_dimensions(eqs, vars);
     //setting fixed vectors a and b for testing
     //set_fixed_vector(a,b);
-    gen_exercise(a,b,eqs,vars,1);
+
+
     // Setting next State
     STATE = "WELCOME";
     } 
@@ -341,11 +345,15 @@ while (true)
     } 
     else if (STATE == "LOAD"){
         // load random exercise depending on difficulty and thus on level
+        gen_exercise(a, b, eqs,  vars, difficulty);
         STATE = "DRAW";
     }
     else if (STATE == "DRAW"){
         std::cout << "-------" << std::endl;
         std::cout << "LEVEL: " << level << std::endl;
+
+        
+        std::cout << std::endl;
         ui.draw_matrix(a, b, eqs, vars);
         STATE = "CHECK";
     }
