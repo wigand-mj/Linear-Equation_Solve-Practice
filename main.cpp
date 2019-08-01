@@ -137,7 +137,7 @@ void operation(){
                     if (order[0] != order[1]){
                         machine.rows_add(a, order); machine.rows_add(b, order);
                     } else {
-                        std::cout << "Adding a row to itself if not allowed. Try Again!" << std::endl;
+                        std::cout << "Adding a row to itself is not allowed. Try Again!" << std::endl;
                     }
                     
                 }
