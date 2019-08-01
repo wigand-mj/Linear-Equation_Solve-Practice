@@ -1,7 +1,3 @@
-//
-// Created by Ronald on 29-7-2019.
-//
-
 #ifndef user_interface_H
 #define user_interface_H
 #include <iostream>
