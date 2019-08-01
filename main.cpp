@@ -361,7 +361,7 @@ while (true)
     else if (STATE == "DRAW"){
         std::cout << "-------" << std::endl;
         std::cout << "LEVEL: " << level << std::endl;
-        std::cout << "DIFFICULTY: " << difficulty << std::endl;
+        std::cout << "DIFFICULTY: " << difficulty+1 << std::endl;
 
         
         std::cout << std::endl;
