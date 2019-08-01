@@ -178,7 +178,7 @@ void operation(){
     
     else {
         std::cout << "Something was wrong with your input. Try again" << std::endl;
-        nSTATE = "OPERATIONS";
+        nSTATE = "DRAW";
         STATE = "TRANS";
     }
 }
