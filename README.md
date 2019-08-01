@@ -4,7 +4,7 @@
 ## TODO
 //new
 - comment everything and make the code pretty for the nice good grade ;)
-- through out unneccessary stuff
+- throw out unneccessary stuff
 
 
 
