@@ -156,7 +156,7 @@ void operation(){
                     if (order[0] != order[1]){
                         machine.rows_subtract(a, order); machine.rows_subtract(b, order);
                     } else {
-                        std::cout << "Subtracting a row from itself if not allowed. Try Again!" << std::endl;
+                        std::cout << "Subtracting a row from itself is not allowed. Try Again!" << std::endl;
                     }
                 }
                 
