@@ -349,14 +349,12 @@ while (true)
     } 
     else if (STATE == "LOAD"){
         // load random exercise depending on difficulty and thus on level
-        /*
         if (level > 3){
             difficulty = 1;
             if (level > 6){
                 difficulty = 2;
             }
         }
-        */
         gen_exercise(a, b, eqs,  vars, difficulty);
         STATE = "DRAW";
     }
