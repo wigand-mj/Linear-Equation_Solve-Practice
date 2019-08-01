@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <cstdlib> // can probably be removed later; currently only used for set_fixed_vectors()
+//#include <cstdlib> // can probably be removed later; currently only used for set_fixed_vectors()
 #include "lineq.h"
 #include "user_interface.h"
 #include "time.h"
@@ -30,26 +30,6 @@ vector<double> b;
 vector < vector<double>> a(4); //2-D A matrix v[i][j] where i is the column and j is the row
 
 
-
-
-
-
-//###################
-void set_fixed_vector(vector <vector<double>> &v1, vector<double> &v2){
-    //lets take vars and eqs 2
-    int vars = 2; int eqs = 2;
-
-    for (int i=0; i<vars; i++){
-        for (int j=0; j<eqs; j++){
-            (v1[i]).push_back(double((rand() % 10) + 1)); //random integer between 1 and 10, (rand() % 10) + 1
-        }
-    }
-
-    for (int j=0; j<eqs; j++){
-        v2.push_back(double((rand() % 10) + 1));
-    }
-}
-//###################s
 
 // parses string and adds to container (usually vector) inspired from: https://stackoverflow.com/questions/14265581/parse-split-a-string-in-c-using-string-delimiter-standard-c
 template<typename Container>
@@ -328,8 +308,6 @@ while (true)
     // getting dimensions
     vars=4; eqs=4;
     machine.update_dimensions(eqs, vars);
-    //setting fixed vectors a and b for testing
-    //set_fixed_vector(a,b);
 
 
     // Setting next State
