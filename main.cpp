@@ -8,9 +8,10 @@
 using namespace std;
 using std::string;
 
-// difficulty level
+// difficulty & level
 
 short difficulty;
+short level;
 
 // system dimensions
 
@@ -116,7 +117,7 @@ bool isSolved (std::vector< std::vector<double>> &v1){
 // asking for input and working with gien user input
 void operation(){
     std::cout << "Which operation do you want to perform?" << std::endl;
-    std::cout << "(s)wap" << ((difficulty >= 1) ? (" - (a)dd - (su)btract") : ("")) << ((difficulty == 2) ? (" - (m)ultiplicate - (d)ivide") : ("")) << "   | [(e)xit]" << std::endl;
+    std::cout << "(s)wap" << ((difficulty >= 1) ? (" - (a)dd - (su)btract") : ("")) << ((difficulty == 2) ? (" - (m)ultiplicate - (d)ivide") : ("")) << "   | [(e)xit] | [try again with (n)ew problem]" << std::endl;
     std::string input;
     std::string op;
     try { std::cin >> input; }
@@ -200,6 +201,9 @@ void operation(){
     } else if (input == "e"){
         nSTATE = "EXIT";
         STATE = "TRANS";
+    } else if (input == "n"){
+        nSTATE = "LOAD";
+        STATE = "TRANS";
     } else if (input == "p"){ //   NEEDS TO BE REMOVED LATER
         if (difficulty<2){
           difficulty++;
@@ -228,8 +232,9 @@ int main(){
 while (true)
 {
     if (STATE == "INIT"){
-    // Setting initial difficulty level
+    // Setting initial difficulty  & level
     difficulty = 0;
+    level = 1;
 
     // getting dimensions
     vars=2; eqs=2;
@@ -238,10 +243,33 @@ while (true)
     set_fixed_vector(a,b);
     
     // Setting next State
-    STATE = "DRAW";
+    STATE = "WELCOME";
+    } 
+    else if (STATE == "WELCOME"){
+        std::cout << "------" << std::endl;
+        std::cout << "Welcome to the Linear Equation System Solving Practice!" << std::endl;
+        std::cout << "You will start at level 1 with only limited tools for solving." << std::endl;
+        std::cout << "After time, the exercises will become more sophisticated, but you will also have more tools to your disposal!" << std::endl;
+        std::cout << "----" << std::endl;
+        std::cout << "How To Play:" << std::endl;
+        std::cout << "Enter the what you want to do with your keyboard and press Enter! It's as simple as that!" << std::endl;
+        std::cout << "Usually you will receive screen instructions on how to input your actions, so read carefully!" << std::endl;
+        
+        
+        STATE = "LOAD";
+    } 
+    else if (STATE == "LOAD"){
+        // load random exercise depending on difficulty and thus on level
+        STATE = "DRAW";
     }
     else if (STATE == "DRAW"){
+        std::cout << "-------" << std::endl;
+        std::cout << "LEVEL: " << level << std::endl;
         ui.draw_matrix(a, b, eqs, vars);
+        STATE = "CHECK";
+    }
+    else if (STATE == "CHECK"){
+        // check if correct and if yes level++ and draw. If level at speciic threshhold, also difficulty++
         STATE = "OPERATION";
     }
     else if (STATE == "OPERATION"){
