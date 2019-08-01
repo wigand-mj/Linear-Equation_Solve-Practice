@@ -229,7 +229,7 @@ vector<double> scramble_order(int vars){
     act1 = rand() % (vars) + 1;
     act2 = rand() % (vars) + 1;
     if (act1 == act2) {
-        if (act1 > 0) {
+        if (act1 > 1) {
             act1--;
         } else {
             act1++;
@@ -268,10 +268,8 @@ void gen_exercise(vector<vector<double> > &a,vector<double> &b, int eqs, int var
         }
         b.push_back(rand()%9+1);
     }
-
-    for (int l = 1; l <=difficulty ; ++l) {
-
-        if(difficulty==1)
+    for (int l = 0; l < difficulty ; ++l) {
+        if(l==0)
         {
             for (int i = 0; i <rand()%5+6; ++i) {
                 order = scramble_order(vars);
@@ -279,11 +277,10 @@ void gen_exercise(vector<vector<double> > &a,vector<double> &b, int eqs, int var
                 machine.rows_swap(b,order);
             }
         }
-        else if (difficulty == 2)
+        else if (l == 1)
         {
             for (int i = 0; i <rand()%3+4; ++i) {
                 order = scramble_order(vars);
-
 
                 machine.rows_add(a, order);
                 machine.rows_add(b, order);
