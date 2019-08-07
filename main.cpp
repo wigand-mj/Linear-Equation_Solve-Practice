@@ -240,6 +240,7 @@ vector<double> scramble_order(int vars){
 
 void gen_exercise(vector<vector<double> > &a,vector<double> &b, int eqs, int vars, short difficulty)
 {
+    // clear 2D vector
     for (int i=0; i<vars; i++){
         a[i].clear();
     }
@@ -252,10 +253,12 @@ void gen_exercise(vector<vector<double> > &a,vector<double> &b, int eqs, int var
     for (int i=0;i<vars;i++) {
         for (int j = 0; j < eqs; j++) {
             if (i == j) {
+                // fill diagonal ones
                 a[i].push_back(1);
 
             } else {
                 if (j > vars - 1) {
+                    //randomize if there is a free variable
                     a[i].push_back((rand() % 9 + 1));
                 } else {
                     a[i].push_back(double(0));
@@ -265,10 +268,12 @@ void gen_exercise(vector<vector<double> > &a,vector<double> &b, int eqs, int var
         }
         b.push_back(rand()%9+1);
     }
+    // include all randomization upto difficulty level
     for (int l = 0; l <= difficulty ; ++l) {
         if(l==0)
         {
             for (int i = 0; i <rand()%5+6; ++i) {
+                // swaps rows randomly a random amount of times
                 order = scramble_order(vars);
                 machine.rows_swap(a,order);
                 machine.rows_swap(b,order);
@@ -278,12 +283,13 @@ void gen_exercise(vector<vector<double> > &a,vector<double> &b, int eqs, int var
         {
             for (int i = 0; i <rand()%3+4; ++i) {
                 order = scramble_order(vars);
-
+                // add rows randomly a random amount of times
                 machine.rows_add(a, order);
                 machine.rows_add(b, order);
             }
             for (int i = 0; i <rand()%3+4; ++i) {
                 order = scramble_order(vars);
+                // subtract rows randomly --
                 machine.rows_subtract(a, order);
                 machine.rows_subtract(b, order);
             }
@@ -292,8 +298,9 @@ void gen_exercise(vector<vector<double> > &a,vector<double> &b, int eqs, int var
         else
         {
             for (int i = 0; i <rand()%3+4; ++i) {
-                act=rand()%4+2;
-                row=rand()%vars+1;
+                act=rand()%4+2; // factor to multiply with 
+                row=rand()%vars+1; // row to multiply
+                // multiply rows randomly
             machine.rows_multiplicate(a,{row,act});
             machine.rows_multiplicate(b,{row,act});
             }
@@ -304,6 +311,7 @@ void gen_exercise(vector<vector<double> > &a,vector<double> &b, int eqs, int var
 
 
 int main(){
+    // start random 'seed'
 srand(time(NULL));
 
 // STATE Machine
