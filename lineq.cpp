@@ -1,7 +1,7 @@
 #include "lineq.h"
 #include <vector>
 
-
+// define variables once for functions to use
 void les::update_dimensions(int e, int v){
     eqs = e; vars = v;
 }
@@ -13,6 +13,7 @@ template<typename T>
         a = b; b = tmp;
     }
 
+// overloading function to except either a vector or an array
 void les::rows_swap(std::vector<double> &v, std::vector<double> order){
     swap<double> (v[order[0]-1], v[order[1]-1]);
 }
